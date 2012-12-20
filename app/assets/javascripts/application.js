@@ -35,25 +35,50 @@ $(document).ready(function() {
     	  $("#attemp").html("Your Attempts ---> "+attempts.toString());
         });
     $(".tag").on('click', function(showimg){
-    	attempts = attempts + 1;
     	id = $(this).attr("id").slice(3)
-    	src = "/assets/Img"+$.trim(map[id])+".jpg"
+		if ($("#"+id).attr("alt") == "Imgblank")
+		{
+		if (flag)
+		{
+		flag = false
+		src = "/assets/Img"+$.trim(map[id])+".jpg"
+    	attempts = attempts + 1;
+    	$("#"+id).attr("alt","imgopen");
     	$("#"+id).attr("src",src);
     	$("#attemp").html("Your Attempts ---> "+attempts.toString());
     	if (clicked)
     	{
     		clicked = false
     		clickarray[1] = id
+    		setTimeout('check()',600)
     	}
     	else
     	{
     		clicked = true
     		clickarray[0] = id
+    		flag = true
     	}
-    	
-    	});
-    
+      }
+	}});    
     });
-jQuery.fn.check = function() {
-    	alert("dd");
+function check() 
+{
+    if ($.trim(map[clickarray[1]]) != $.trim(map[clickarray[0]]))
+    {
+    	src = "/assets/Imgblank.jpg"
+    	$("#"+clickarray[0]).attr("alt","Imgblank");
+    	$("#"+clickarray[0]).attr("src",src);
+		$("#"+clickarray[1]).attr("alt","Imgblank");
+    	$("#"+clickarray[1]).attr("src",src);
+    	flag = true
     }
+    else
+    {
+    	totval = totval + 1
+    	if (totval == 8)
+    	{
+    		alert("Game finished. You completed the game in " + attempts.toString() + " clicks.")
+    	}
+    	flag = true
+    }
+}
