@@ -5,6 +5,12 @@
 #div1 {width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;}
 </style>
 <script>
+var map = "<%= @game %>".slice(1,-1).split(",");
+var user = new Array();
+var temparray = new Array();
+var clickarray = new Array(0, 0);
+var attempts = 0;
+
 function allowDrop(ev)
 {
 ev.preventDefault();
@@ -24,35 +30,34 @@ ev.target.appendChild(document.getElementById(data));
 </script>
 </head>
 <body>
-	<%= @game %>
-	
-<table>
+<table align = "Center">
 <tr>
-<td id = "tag1"><%= image_tag("pic_orig.gif", :border=>0)%></td>
-<td id = "tag2"><%= image_tag("pic_orig.gif", :border=>0)%></td>
-<td id = "tag3"><%= image_tag("pic_orig.gif", :border=>0)%></td>
-<td id = "tag4"><%= image_tag("pic_orig.gif", :border=>0)%></td>
+<td id = "tag0", class = "tag"><%= image_tag("Imgblank.jpg", :id => "0", :border=>0)%></td>
+<td id = "tag1", class = "tag"><%= image_tag("Imgblank.jpg", :id => "1", :border=>0)%></td>
+<td id = "tag2", class = "tag"><%= image_tag("Imgblank.jpg", :id => "2", :border=>0)%></td>
+<td id = "tag3", class = "tag"><%= image_tag("Imgblank.jpg", :id => "3", :border=>0)%></td>
 </tr>
 <tr>
-<td id = "tag5"><%= image_tag("pic_orig.gif", :border=>0)%></td>
-<td id = "tag6"><%= image_tag("pic_orig.gif", :border=>0)%></td>
-<td id = "tag7"><%= image_tag("pic_orig.gif", :border=>0)%></td>
-<td id = "tag8"><%= image_tag("pic_orig.gif", :border=>0)%></td>
+<td id = "tag4", class = "tag"><%= image_tag("Imgblank.jpg", :id => "4", :border=>0)%></td>
+<td id = "tag5", class = "tag"><%= image_tag("Imgblank.jpg", :id => "5", :border=>0)%></td>
+<td id = "tag6", class = "tag"><%= image_tag("Imgblank.jpg", :id => "6", :border=>0)%></td>
+<td id = "tag7", class = "tag"><%= image_tag("Imgblank.jpg", :id => "7", :border=>0)%></td>
 </tr>
 <tr>
-<td id = "tag9"><%= image_tag("pic_orig.gif", :border=>0)%></td>
-<td id = "tag10"><%= image_tag("pic_orig.gif", :border=>0)%></td>
-<td id = "tag11"><%= image_tag("pic_orig.gif", :border=>0)%></td>
-<td id = "tag12"><%= image_tag("pic_orig.gif", :border=>0)%></td>
+<td id = "tag8", class = "tag"><%= image_tag("Imgblank.jpg", :id => "8", :border=>0)%></td>
+<td id = "tag9", class = "tag"><%= image_tag("Imgblank.jpg", :id => "9", :border=>0)%></td>
+<td id = "tag10", class = "tag"><%= image_tag("Imgblank.jpg", :id => "10", :border=>0)%></td>
+<td id = "tag11", class = "tag"><%= image_tag("Imgblank.jpg", :id => "11", :border=>0)%></td>
 </tr>
 <tr>
-<td id = "tag13"><%= image_tag("pic_orig.gif", :border=>0)%></td>
-<td id = "tag14"><%= image_tag("pic_orig.gif", :border=>0)%></td>
-<td id = "tag15"><%= image_tag("pic_orig.gif", :border=>0)%></td>
-<td id = "tag16"><%= image_tag("pic_orig.gif", :border=>0)%></td>
+<td id = "tag12", class = "tag"><%= image_tag("Imgblank.jpg", :id => "12", :border=>0)%></td>
+<td id = "tag13", class = "tag"><%= image_tag("Imgblank.jpg", :id => "13", :border=>0)%></td>
+<td id = "tag14", class = "tag"><%= image_tag("Imgblank.jpg", :id => "14", :border=>0)%></td>
+<td id = "tag15", class = "tag"><%= image_tag("Imgblank.jpg", :id => "15", :border=>0)%></td>
 </tr>
 </table>
-
+<br><br>
+<div id = 'attemp', align = "Center">Your Attempts ---> </div>
 <p>Drag the Ruby on Rails image into the rectangle:</p>
 
 <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
