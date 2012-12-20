@@ -31,15 +31,29 @@ setTimeout('returntoold()', 600);
    }
 }
 $(document).ready(function() {
-
     $(function() {
     	  $("#attemp").html("Your Attempts ---> "+attempts.toString());
         });
     $(".tag").on('click', function(showimg){
     	attempts = attempts + 1;
     	id = $(this).attr("id").slice(3)
-		src = "/assets/Img"+$.trim(map[id])+".jpg"
+    	src = "/assets/Img"+$.trim(map[id])+".jpg"
     	$("#"+id).attr("src",src);
     	$("#attemp").html("Your Attempts ---> "+attempts.toString());
-        });
+    	if (clicked)
+    	{
+    		clicked = false
+    		clickarray[1] = id
+    	}
+    	else
+    	{
+    		clicked = true
+    		clickarray[0] = id
+    	}
+    	
+    	});
+    
     });
+jQuery.fn.check = function() {
+    	alert("dd");
+    }
