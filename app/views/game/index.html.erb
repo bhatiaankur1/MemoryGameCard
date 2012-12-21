@@ -5,7 +5,6 @@
 </style>
 <script>
 var map = "<%= @game %>".slice(1,-1).split(",");
-var user = new Array();
 var totval = 0;
 var clicked = false;
 var clickarray = new Array(0, 0);
@@ -42,5 +41,9 @@ var flag = true;
 </table>
 <br><br>
 <div id = 'attemp', align = "Center">Your Attempts ---> </div>
+<br>
+<div class="actions", align = "Center">
+	<%= submit_tag "Restart Game", :type => 'button', :onclick => 'restartgame()', :class => "restart"%>
+   </div>
 </body>
 </html>

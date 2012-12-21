@@ -82,3 +82,32 @@ function check()
     	flag = true
     }
 }
+function restartgame()
+{
+	randomizearray()
+	totval = 0;
+	clicked = false;
+	clickarray = [0, 0];
+	attempts = 0;
+	flag = true;
+	var src = "/assets/Imgblank.jpg";
+	for(var i = 0; i < 16; i++)
+	{
+		var j = i.toString();
+    	$("#"+j).attr("alt","Imgblank");
+    	$("#"+j).attr("src",src);
+	}
+	$("#attemp").html("Your Attempts ---> "+attempts.toString());
+}
+
+function randomizearray()
+{
+  var i = map.length;
+   while ( --i ) {
+     var j = Math.floor( Math.random() * ( i + 1 ) );
+     var tempi = map[i];
+     var tempj = map[j];
+     map[i] = tempj;
+     map[j] = tempi;
+   }
+}

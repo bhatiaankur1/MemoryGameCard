@@ -11,3 +11,7 @@
  *= require_self
  *= require_tree .
  */
+.restart
+{
+	background-color: #c9c1f5
+}
