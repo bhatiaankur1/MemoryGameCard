@@ -1,8 +1,5 @@
 <html>
 <head>
-<style type="text/css">
-#div1 {width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;}
-</style>
 <script>
 var map = "<%= @game %>".slice(1,-1).split(",");
 var totval = 0;
@@ -10,9 +7,19 @@ var clicked = false;
 var clickarray = new Array(0, 0);
 var attempts = 0;
 var flag = true;
+var lowscore = "<%= current_user.LowestClicksL1 %>"
+var userid = "<%= current_user.id %>"
 </script>
 </head>
 <body>
+	Welcome <%= current_user.name%>
+	 <% if user_signed_in? %>              
+       <%= link_to "Log Out", destroy_user_session_path, :method => :delete  %><br>
+       <div id = "LC">Lowest Clicks : <%= current_user.LowestClicksL1 %></div>
+     <% else %>
+        <%= link_to "Log In", new_user_session_path  %>
+        <%= link_to "Register",  new_user_registration_path  %>
+    <% end %>
 <table align = "Center">
 <tr>
 <td id = "tag0", class = "tag"><%= image_tag("Imgblank.jpg", :id => "0", :border=>0)%></td>
@@ -45,5 +52,8 @@ var flag = true;
 <div class="actions", align = "Center">
 	<%= submit_tag "Restart Game", :type => 'button', :onclick => 'restartgame()', :class => "restart"%>
    </div>
+   <h4><u>Rules </u></h4>
+   Click on the squares. If you click on two squares with similar images, they will open else they will close.
+   You have to open all the squares in least number of clicks.
 </body>
 </html>

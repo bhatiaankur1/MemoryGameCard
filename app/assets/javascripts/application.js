@@ -14,22 +14,6 @@
 //= require jquery_ujs
 //= require_tree .
 
-
-function showimage(but) {
-if (oktoclick) {
-oktoclick = false; 
-document.f[('img'+but)].src = 'image'+map[but]+'.gif';
-if (ctr == 0) {
-ctr++;
-clickarray[0] = but;
-oktoclick = true;
-} else {
-clickarray[1] = but;
-ctr = 0;
-setTimeout('returntoold()', 600);
-      }
-   }
-}
 $(document).ready(function() {
     $(function() {
     	  $("#attemp").html("Your Attempts ---> "+attempts.toString());
@@ -50,7 +34,7 @@ $(document).ready(function() {
     	{
     		clicked = false
     		clickarray[1] = id
-    		setTimeout('check()',600)
+    		check()
     	}
     	else
     	{
@@ -58,6 +42,7 @@ $(document).ready(function() {
     		clickarray[0] = id
     		flag = true
     	}
+
       }
 	}});    
     });
@@ -65,19 +50,28 @@ function check()
 {
     if ($.trim(map[clickarray[1]]) != $.trim(map[clickarray[0]]))
     {
-    	src = "/assets/Imgblank.jpg"
-    	$("#"+clickarray[0]).attr("alt","Imgblank");
-    	$("#"+clickarray[0]).attr("src",src);
-		$("#"+clickarray[1]).attr("alt","Imgblank");
-    	$("#"+clickarray[1]).attr("src",src);
-    	flag = true
-    }
+      	setTimeout('resetarr()',800)
+   	}
     else
     {
     	totval = totval + 1
     	if (totval == 8)
     	{
-    		alert("Game finished. You completed the game in " + attempts.toString() + " clicks.")
+    		if (parseInt(lowscore) > attempts)
+    		{
+    			$.ajax({
+ 						 type: "GET",
+  							url: "/gameend",
+  							data: { iduser: userid, attempts: attempts.toString()}
+							}).done(function() {$('#LC').html("Lowest Clicks " + attempts.toString());lowscore = attempts.toString();alert("Congratulations. This is your lowest number of clicks");restartgame();});
+    		}
+			else
+			{
+				alert("Game finished. You completed the game in " + attempts.toString() + " clicks.")
+			restartgame()
+			}
+
+         		
     	}
     	flag = true
     }
@@ -93,9 +87,8 @@ function restartgame()
 	var src = "/assets/Imgblank.jpg";
 	for(var i = 0; i < 16; i++)
 	{
-		var j = i.toString();
-    	$("#"+j).attr("alt","Imgblank");
-    	$("#"+j).attr("src",src);
+		var j = i.toString();    	
+    	reset(j,src,"Imgblank")
 	}
 	$("#attemp").html("Your Attempts ---> "+attempts.toString());
 }
@@ -110,4 +103,17 @@ function randomizearray()
      map[i] = tempj;
      map[j] = tempi;
    }
+}
+function resetarr()
+{
+	src = "/assets/Imgblank.jpg"
+    var Imgblank = "Imgblank"
+    reset(clickarray[0],src,Imgblank)
+    reset(clickarray[1],src,Imgblank)
+    flag = true
+}
+function reset(j,src,imgsrc)
+{
+$("#"+j).attr("alt",imgsrc);
+$("#"+j).attr("src",src);
 }
