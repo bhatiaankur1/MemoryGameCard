@@ -57,7 +57,7 @@ function check()
     	totval = totval + 1
     	if (totval == 8)
     	{
-    		if (parseInt(lowscore) > attempts)
+    		if (parseInt(lowscore) > attempts || lowscore == "")
     		{
     			$.ajax({
  						 type: "GET",
