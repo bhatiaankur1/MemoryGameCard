@@ -77,7 +77,7 @@ function check()
 {
     if ($.trim(map[clickarray[1]]) != $.trim(map[clickarray[0]]))
     {
-      	setTimeout('resetarr()',800)
+      	setTimeout('resetarr()',1200)
    	}
     else
     {
