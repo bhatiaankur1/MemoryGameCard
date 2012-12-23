@@ -1,5 +1,8 @@
 Memorygamecard::Application.routes.draw do
   devise_for :users
+  resources :games_levels
+  resources :games_level3
+
   match 'gameend' => "Game#game_end", :via => :get
 
   # The priority is based upon order of creation:

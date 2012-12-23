@@ -18,6 +18,33 @@ $(document).ready(function() {
     $(function() {
     	  $("#attemp").html("Your Attempts ---> "+attempts.toString());
         });
+        $(".tagL").on('click', function(showimgL){
+        id = $(this).attr("id").slice(3)
+    if ($("#"+id).attr("alt") == "Img32")
+    {
+    if (flag)
+    {
+    flag = false
+    src = "/assets/Img"+$.trim(map[id])+".gif"
+      attempts = attempts + 1;
+      $("#"+id).attr("alt","imgopen");
+      $("#"+id).attr("src",src);
+      $("#attemp").html("Your Attempts ---> "+attempts.toString());
+      if (clicked)
+      {
+        clicked = false
+        clickarray[1] = id
+        check()
+      }
+      else
+      {
+        clicked = true
+        clickarray[0] = id
+        flag = true
+      }
+
+      }
+  }});
     $(".tag").on('click', function(showimg){
     	id = $(this).attr("id").slice(3)
 		if ($("#"+id).attr("alt") == "Imgblank")
@@ -55,14 +82,14 @@ function check()
     else
     {
     	totval = totval + 1
-    	if (totval == 8)
+    	if ((totval == 8 && level == "1") || (totval == 18 && level == "2") || (totval == 32 && level == "3"))
     	{
     		if (parseInt(lowscore) > attempts || lowscore == "")
     		{
     			$.ajax({
  						 type: "GET",
   							url: "/gameend",
-  							data: { iduser: userid, attempts: attempts.toString()}
+                data: { iduser: userid, attempts: attempts.toString(), gamelevel: level.toString()}
 							}).done(function() {$('#LC').html("Lowest Clicks " + attempts.toString());lowscore = attempts.toString();alert("Congratulations. This is your lowest number of clicks");restartgame();});
     		}
 			else
@@ -70,8 +97,7 @@ function check()
 				alert("Game finished. You completed the game in " + attempts.toString() + " clicks.")
 			restartgame()
 			}
-
-         		
+  		
     	}
     	flag = true
     }
@@ -84,11 +110,28 @@ function restartgame()
 	clickarray = [0, 0];
 	attempts = 0;
 	flag = true;
+  if (level == "1")
+  {
 	var src = "/assets/Imgblank.jpg";
-	for(var i = 0; i < 16; i++)
+  p = 16;
+  var imgblank = "Imgblank"
+  }
+  else if (level == "2")
+  {
+    var src = "/assets/Img32.gif";
+    p = 36;
+    var imgblank = "Img32"
+  }
+  else
+  {
+    var src = "/assets/Img32.gif";
+    p = 64;
+    var imgblank = "Img32"
+  }
+	for(var i = 0; i < p; i++)
 	{
 		var j = i.toString();    	
-    	reset(j,src,"Imgblank")
+    	reset(j,src,imgblank)
 	}
 	$("#attemp").html("Your Attempts ---> "+attempts.toString());
 }
@@ -106,8 +149,16 @@ function randomizearray()
 }
 function resetarr()
 {
-	src = "/assets/Imgblank.jpg"
+	if (level == "1")
+  {
+    src = "/assets/Imgblank.jpg";
     var Imgblank = "Imgblank"
+  }
+  else
+    {
+      src = "/assets/Img32.gif";
+      var Imgblank = "Img32"
+    }
     reset(clickarray[0],src,Imgblank)
     reset(clickarray[1],src,Imgblank)
     flag = true

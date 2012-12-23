@@ -7,19 +7,24 @@ var clicked = false;
 var clickarray = new Array(0, 0);
 var attempts = 0;
 var flag = true;
+var level = "1";
 var lowscore = "<%= current_user.LowestClicksL1 %>"
 var userid = "<%= current_user.id %>"
 </script>
 </head>
 <body>
 	Welcome <%= current_user.name%>
-	 <% if user_signed_in? %>              
-       <%= link_to "Log Out", destroy_user_session_path, :method => :delete  %><br>
+   <% if user_signed_in? %>              
+       <%= link_to "Log Out", destroy_user_session_path, :method => :delete  %>
+       <br>
+      Your Current Level is Level 1. Goto <%= link_to 'Level 2', games_levels_path %> <%= link_to 'Level 3', games_level3_index_path %><br>
        <div id = "LC">Lowest Clicks : <%= current_user.LowestClicksL1 %></div>
      <% else %>
         <%= link_to "Log In", new_user_session_path  %>
         <%= link_to "Register",  new_user_registration_path  %>
+        <font align = "right">Your Current Level is Level 1. Goto <%= link_to 'Level 2', games_levels_path %> <%= link_to 'Level 3', games_level3_index_path %></font>
     <% end %>
+
 <table align = "Center">
 <tr>
 <td id = "tag0", class = "tag"><%= image_tag("Imgblank.jpg", :id => "0", :border=>0)%></td>
@@ -45,6 +50,7 @@ var userid = "<%= current_user.id %>"
 <td id = "tag14", class = "tag"><%= image_tag("Imgblank.jpg", :id => "14", :border=>0)%></td>
 <td id = "tag15", class = "tag"><%= image_tag("Imgblank.jpg", :id => "15", :border=>0)%></td>
 </tr>
+
 </table>
 <br><br>
 <div id = 'attemp', align = "Center">Your Attempts ---> </div>

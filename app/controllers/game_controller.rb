@@ -5,7 +5,14 @@ class GameController < ApplicationController
 	end
 	def game_end
 		@user = User.find(params[:iduser]);
-		@user.LowestClicksL1 = params[:attempts].to_i
+		if (params[:gamelevel] == "1")
+			@user.LowestClicksL1 = params[:attempts].to_i
+		elsif (params[:gamelevel] == "2")
+			@user.LowestClicksL2 = params[:attempts].to_i
+		else
+			@user.LowestClicksL3 = params[:attempts].to_i
+		end
+		
 		@user.save
 	end
 
