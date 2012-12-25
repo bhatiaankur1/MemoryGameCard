@@ -8,6 +8,6 @@ class User < ActiveRecord::Base
    validates_presence_of :name
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :LowestClicksL1, :LowestClicksL2, :LowestClicksL3, :roles
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :LowestClicksL1, :LowestClicksL2, :LowestClicksL3, :Roles
   # attr_accessible :title, :body
 end
