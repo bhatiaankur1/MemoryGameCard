@@ -16,7 +16,11 @@ var userid = "<%= current_user.id %>"
   Welcome <%= current_user.name%>
    <% if user_signed_in? %>              
        <%= link_to "Log Out", destroy_user_session_path, :method => :delete  %><br>
-       Your Current Level is Level 3. Goto <%= link_to 'Level 1', "/" %> <%= link_to 'Level 2', games_levels_path %><br>
+       Your Current Level is Level 3. Goto <%= link_to 'Level 1', "/" %> <%= link_to 'Level 2', games_levels_path %>
+<% if(can? :destroy,:user) %>
+<%= link_to 'Admin', allusers_path %>
+<%end%>
+       <br>
        <div id = "LC">Lowest Clicks : <%= current_user.LowestClicksL3 %></div>
      <% else %>
         <%= link_to "Log In", new_user_session_path  %>
