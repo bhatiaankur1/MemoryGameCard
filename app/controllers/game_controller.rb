@@ -4,7 +4,7 @@ class GameController < ApplicationController
 		@game = [0,1,2,3,4,5,6,7,0,1,2,3,4,5,6,7].sort{rand() - 0.5}
 	end
 	def game_end
-		@user = User.find(params[:iduser]);
+		@user = User.find(current_user);
 		if (params[:gamelevel] == "1")
 			@user.LowestClicksL1 = params[:attempts].to_i
 		elsif (params[:gamelevel] == "2")
@@ -12,8 +12,7 @@ class GameController < ApplicationController
 		else
 			@user.LowestClicksL3 = params[:attempts].to_i
 		end
-		
-		@user.save
+			@user.save
 	end
 
 end

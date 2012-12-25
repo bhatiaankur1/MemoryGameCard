@@ -15,6 +15,20 @@
 //= require_tree .
 
 $(document).ready(function() {
+  $(".restartAdmin").live("click", function(){
+  $.ajax({
+             type: "GET",
+                url: "/updateadmin",
+                data: {id: $(this).attr("id")}
+              }).done();
+        });
+  $(".deleteadmin").live("click", function(){
+  $.ajax({
+             type: "GET",
+                url: "/deluser",
+                data: {id: $(this).attr("id")}
+              }).done();
+        });
     $(function() {
     	  $("#attemp").html("Your Attempts ---> "+attempts.toString());
         });
@@ -89,7 +103,7 @@ function check()
     			$.ajax({
  						 type: "GET",
   							url: "/gameend",
-                data: { iduser: userid, attempts: attempts.toString(), gamelevel: level.toString()}
+                data: {attempts: attempts.toString(), gamelevel: level.toString()}
 							}).done(function() {$('#LC').html("Lowest Clicks " + attempts.toString());lowscore = attempts.toString();alert("Congratulations. This is your lowest number of clicks");restartgame();});
     		}
 			else
@@ -167,4 +181,8 @@ function reset(j,src,imgsrc)
 {
 $("#"+j).attr("alt",imgsrc);
 $("#"+j).attr("src",src);
+}
+function adminchange()
+{
+  alert(($(this).attr("id")).toString());
 }

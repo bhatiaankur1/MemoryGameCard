@@ -1,0 +1,29 @@
+<script>
+var attempts = 0;
+</script>
+<body>
+Welcome <%= current_user.name%>
+   <% if user_signed_in? %>              
+       <%= link_to "Log Out", destroy_user_session_path, :method => :delete  %><br>
+       <%= link_to 'Level 1', "/" %> <%= link_to 'Level 2', games_levels_path %><%= link_to 'Level 3', games_level3_index_path %><br>
+      <% else %>
+        <%= link_to "Log In", new_user_session_path  %>
+        <%= link_to "Register",  new_user_registration_path  %>
+    <% end %>
+<table>
+  <tr>
+    <th> Name </th>
+    <th>Email </th>
+    <th> Lowest Clicks - L1 </th>
+    <th> Lowest Clicks - L2 </th>
+    <th> Lowest Clicks - L3 </th>
+    <th> Roles </th>
+  </tr>
+
+<% @users.each do |user| %>
+<tr id = "tr<%= user.id %>">
+<%= render :partial => 'userdet.html.erb', :locals => {:user => user} %>
+</tr>
+ <% end %>
+</table>
+</body>

@@ -2,9 +2,11 @@ Memorygamecard::Application.routes.draw do
   devise_for :users
   resources :games_levels
   resources :games_level3
-
+  resources :allusers
   match 'gameend' => "Game#game_end", :via => :get
-
+  match 'allusers' => "allusers#index", :via => :get
+  match 'updateadmin' => "allusers#update_admin", :via => :get
+  match 'deluser' => "allusers#delete_user", :via => :get
   # The priority is based upon order of creation:
   # first created -> highest priority.
 root :to => "Game#index"

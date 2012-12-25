@@ -1,0 +1,7 @@
+<% if @user.save -%>
+$("#tr<%= @user.id -%>").html("")
+var html = "<%= escape_javascript(render :partial => 'userdet', :locals => {:user => @user})-%>"
+$("#tr<%= @user.id -%>").append(html)
+<% else %>
+alert("error")
+<% end %>
